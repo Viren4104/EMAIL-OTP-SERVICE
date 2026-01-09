@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-// Import the functions we just created
-// IMPORTANT: The names inside { } must match exports.login and exports.verifyOTP
+// Import must match the names 'login' and 'verifyOTP'
 const { login, verifyOTP } = require('../controllers/authController'); 
 
-// Route 1: Login
-router.post('/login', login); 
+// Check if functions are loaded correctly (Debug)
+if (!login || !verifyOTP) {
+    console.error("Error: Controller functions are undefined. Check authController.js exports.");
+}
 
-// Route 2: Verify OTP
+router.post('/login', login); 
 router.post('/verify-otp', verifyOTP);
 
 module.exports = router;
